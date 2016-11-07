@@ -7,12 +7,7 @@ Page({
     screenHeight: 0,
     screenWidth: 0
   },
-  //事件处理函数
-  toLogs: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
+ 
   onLoad: function () {
     var _this = this;
     wx.getSystemInfo( {

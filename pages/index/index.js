@@ -7,9 +7,9 @@ Page({
     userInfo: {}
   },
   //事件处理函数
-  toSplash: function() {
+  toTab: function() {
     wx.navigateTo({
-      url: '../splash/index'
+      url: '../tab/tab'
     })
   },
   onLoad: function () {

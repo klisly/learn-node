@@ -3,6 +3,7 @@
     "pages/splash/index",   
     "pages/index/index",
     "pages/profile/index",
+    "pages/tab/tab",
     "pages/logs/logs"
   ],
   "window": {

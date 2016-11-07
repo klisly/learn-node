@@ -3,8 +3,8 @@
 
 <view class="body">
     <view class="widgets__item">
-        <view id="content" class="widgets__info" bindtap="toSplash">
-            <text class="widgets__info-name">Splash启动页面</text>
+        <view id="content" class="widgets__info" bindtap="toTab">
+            <text class="widgets__info-name">TabLayout示例页面</text>
         </view>
     </view>
 </view>
