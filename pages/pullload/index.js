@@ -1,5 +1,3 @@
-//index.js
-//获取应用实例
 var app = getApp()
 var that;
 Page({
@@ -18,66 +16,6 @@ Page({
         "articleCount": 2926,
         "followerCount": 1
     },
-    {
-        "_id": "57a8b5feb6a37f4721200c49",
-        "name": "故事",
-        "articleNum": 0,
-        "__v": 0,
-        "updateAt": 1473612753547,
-        "createAt": 1470674207147,
-        "image": "/images/channelbrand.jpg",
-        "isBlock": false,
-        "articleCount": 4627,
-        "followerCount": 2
-    },
-    {
-        "_id": "57a8b5f4b6a37f4721200c47",
-        "name": "杂文",
-        "articleNum": 0,
-        "__v": 0,
-        "updateAt": 1470674207147,
-        "createAt": 1470674207147,
-        "image": "/images/channelbrand.jpg",
-        "isBlock": false,
-        "articleCount": 7029,
-        "followerCount": 2
-    },
-    {
-        "_id": "57a8b5efb6a37f4721200c46",
-        "name": "诗歌",
-        "articleNum": 0,
-        "__v": 0,
-        "updateAt": 1470674207147,
-        "createAt": 1470674207147,
-        "image": "/images/channelbrand.jpg",
-        "isBlock": false,
-        "articleCount": 4694,
-        "followerCount": 1
-    },
-    {
-        "_id": "57a8b609b6a37f4721200c4b",
-        "name": "历史",
-        "articleNum": 0,
-        "__v": 0,
-        "updateAt": 1470674207147,
-        "createAt": 1470674207147,
-        "image": "/images/channelbrand.jpg",
-        "isBlock": false,
-        "articleCount": 2270,
-        "followerCount": 1
-    },
-    {
-        "_id": "57a8b605b6a37f4721200c4a",
-        "name": "趣闻",
-        "articleNum": 0,
-        "__v": 0,
-        "updateAt": 1470674207147,
-        "createAt": 1470674207147,
-        "image": "/images/channelbrand.jpg",
-        "isBlock": false,
-        "articleCount": 63,
-        "followerCount": 2
-    },
   ],
     contents:[],
     selectedTopic:'美文',
@@ -90,7 +28,7 @@ Page({
     windowHeight:1024,
     loadingMore:false,
     refreshData:false,
-    pageSize:20,
+    pageSize:10,
     footerIconColor:null,
   },
   //事件处理函数
@@ -98,13 +36,11 @@ Page({
       var tmp = e.target.id;
       var curData = this.data;
       if(tmp != this.data.selectedTopic){
-        this.setData({ selectedTopic:tmp, curPage:0, hasMore:true, contents:[]});
+        this.setData({ selectedTopic:tmp, refreshData:false, contents:[], curPage:0, hasMore:true, contents:[]});
         this.refreshData();
       } 
   },
   loadData:function(){
-    this.data["loadingMore"] = true;
-    updateLoadLoadMoreBall.call(this);
      wx.request({
       url: 'http://second.imdao.cn/articles?topics='+that.data.selectedTopic+"&page="+(parseInt(this.data.curPage)+1)+"&pageSize="+this.data.pageSize,
       data: {},
@@ -114,7 +50,7 @@ Page({
       success: function(res) {
         that.data["loadingMore"] = false;
         that.data["refreshData"] = false;
-
+        that.stopPullDownRefresh();
         if (res.data.code == 200) {
           var tmp = that.data.contents;
           if(res.data.data.length == 0){
@@ -135,11 +71,26 @@ Page({
       }
     })
   },
+  onPullDownRefresh: function () {
+    this.refreshData();
+  },
+  stopPullDownRefresh: function () {
+    wx.stopPullDownRefresh({
+      complete: function (res) {
+        console.log(res, new Date())
+      }
+    })
+  },
   loadingMore:function(){
     if(this.data["loadingMore"]){
      return;
     }
-    this.loadData();
+    updateLoadLoadMoreBall.call(this);
+    this.setData({loadingMore:true});
+    var that = this;
+    setTimeout(function(){
+      that.loadData();
+    }, 1500)
   },
   refreshData:function(){
     if(this.data["refreshData"]){
@@ -153,6 +104,7 @@ Page({
     this.refreshAnim = wx.createAnimation({duration: rotate, delay:0});
   },
   onLoad: function () {
+    that = this;
     wx.getSystemInfo({
       success: function(res) {
         console.log(res.model)
@@ -164,7 +116,6 @@ Page({
         that.setData({windowHeight:res.windowHeight})
       }
     })
-    that = this;
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function(userInfo){
       //更新数据
@@ -192,11 +143,16 @@ function updateRefreshBall() {
     
     count++;
     console.log("updateRefreshBall, count:"+count);
-    _this.refreshAnim.rotate(count * 360).step();
-    _this.setData({ refreshAnim: _this.refreshAnim.export() });
+    try{
+      _this.refreshAnim.rotate(count * 360).step();
+      _this.setData({ refreshAnim: _this.refreshAnim.export() });
+    } catch(e){
+        console.log("e:"+e);
+    }
     if( !that.data[ 'refreshData' ] ) {
       clearInterval( timer );
     }
+
   }, rotate);
 }
 

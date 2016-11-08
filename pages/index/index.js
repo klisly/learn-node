@@ -9,7 +9,17 @@ Page({
   //事件处理函数
   toTab: function() {
     wx.navigateTo({
-      url: '../tab/tab'
+      url: '../tab/index'
+    })
+  },
+  toSplash: function() {
+    wx.navigateTo({
+      url: '../splash/index'
+    })
+  },
+  toLoadPull: function() {
+    wx.navigateTo({
+      url: '../pullload/index'
     })
   },
   onLoad: function () {

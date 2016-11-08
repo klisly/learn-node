@@ -1,9 +1,10 @@
 {
   "pages": [
-    "pages/splash/index",   
     "pages/index/index",
+    "pages/splash/index",   
     "pages/profile/index",
-    "pages/tab/tab",
+    "pages/tab/index",
+    "pages/pullload/index",
     "pages/logs/logs"
   ],
   "window": {

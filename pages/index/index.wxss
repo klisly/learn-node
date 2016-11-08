@@ -11,8 +11,8 @@
     overflow: hidden;
 }
 .widgets__item{
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 20rpx;
+    margin-bottom: 20rpx;
     background-color: #FFFFFF;
     overflow: hidden;
     border-radius: 2px;
