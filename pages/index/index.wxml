@@ -17,5 +17,10 @@
             <text class="widgets__info-name">下拉刷新/底部自动加载</text>
         </view>
     </view>
+    <view class="widgets__item">
+            <view id="content" class="widgets__info" bindtap="toUpload">
+                <text class="widgets__info-name">上传图片</text>
+            </view>
+        </view>
 </view>
 </view>

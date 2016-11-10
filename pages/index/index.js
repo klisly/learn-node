@@ -22,6 +22,13 @@ Page({
       url: '../pullload/index'
     })
   },
+
+  toUpload: function() {
+    wx.navigateTo({
+      url: '../upload/index'
+    })
+  },
+  
   onLoad: function () {
     console.log('onLoad')
     var that = this
