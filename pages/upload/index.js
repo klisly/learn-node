@@ -29,11 +29,13 @@ Page({
                 url: 'http://localhost:3000/upload', //仅为示例，非真实的接口地址
                 filePath: data,
                 name: 'file',
-                formData: {},
+                formData: {"uid":"18301441595"},
                 success: function (res) {
                     console.log("upload images success");
                 }
             })
+        }).catch((err)=>{
+            util.log("res",err);
         })
 
     },

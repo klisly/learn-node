@@ -18,9 +18,14 @@
         </view>
     </view>
     <view class="widgets__item">
-            <view id="content" class="widgets__info" bindtap="toUpload">
-                <text class="widgets__info-name">上传图片</text>
-            </view>
+        <view id="content" class="widgets__info" bindtap="toUpload">
+                       <text class="widgets__info-name">上传图片</text>
+                   </view>
+               </view>
+    <view class="widgets__item">
+        <view id="content" class="widgets__info" bindtap="toDialog">
+            <text class="widgets__info-name">自定义弹出框</text>
         </view>
+    </view>
 </view>
 </view>

@@ -28,6 +28,11 @@ Page({
       url: '../upload/index'
     })
   },
+  toDialog: function() {
+    wx.navigateTo({
+      url: '../dialog/index'
+    })
+  },
   
   onLoad: function () {
     console.log('onLoad')

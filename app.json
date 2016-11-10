@@ -6,6 +6,7 @@
     "pages/tab/index",
     "pages/pullload/index",
     "pages/upload/index",
+    "pages/dialog/index",
     "pages/logs/logs"
   ],
   "window": {

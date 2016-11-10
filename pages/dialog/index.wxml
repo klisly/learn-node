@@ -1,0 +1,12 @@
+
+<view>
+    <button bindtap="showImageDialog">图片选择窗口/删除</button>
+    <button bindtap="showImageDialog">输入窗口</button>
+</view>
+
+<view class="section-dialog halftransparent tansdialog" style="opacity: {{dialogAlpha}}" wx:if="{{showDialog}}" >
+        <view class="dialog" style="opacity: {{dialogAlpha}}" >
+             <text class="dialog-item0" bindtap="chooseImage">选择相片</text>
+             <text class="dialog-item1" bindtap="delImage">删除</text>
+        </view>
+</view>
