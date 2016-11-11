@@ -52,13 +52,15 @@ page {
 .tansdialog{
     display: flex;
     justify-content: center;
-    align-items: center
+    align-items: center;
+    flex-direction: column;
 }
 
 .dialog{
     width: 80%;
     display: flex;
     flex-direction: column;
+    margin: 8px;
     justify-content: space-between;
     align-items: flex-start;
     background:white;
@@ -73,3 +75,37 @@ page {
     padding: 12px 0px 12px 20px;
 }
 
+.dialog-item-input-title{
+    font-size: 24px;
+    padding: 12px 0px 12px 20px;
+    color: black
+}
+
+.dialog-item-input-input{
+    padding: 12px 0px 12px 20px;
+    color: black;
+    widows: 100%;
+}
+
+.dialog-item-input-button{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items:center;
+    background:white;
+}
+
+.dialog-item-input-button-cancle{
+    font-size: 18px;
+    color: rgb(196,18,0);
+    padding: 12px 0px 12px 20px;
+    margin-right: 20px;
+}
+
+.dialog-item-input-button-confirm{
+    font-size: 18px;
+    color: rgb(196,18,0);
+    padding: 12px 0px 12px 20px;
+    margin-right: 20px;
+}

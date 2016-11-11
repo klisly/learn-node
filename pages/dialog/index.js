@@ -7,8 +7,13 @@ Page({
     splash: {},
     screenHeight: 0,
     screenWidth: 0,
+    // dialog 属性
     dialogBgAlpha:0,
-    dialogAlpha:0
+    dialogAlpha:0,
+    dialogType:0,
+    dialogHolder:"请输入",
+    dialogFocus:false,
+    inputValue:""
   },
  
   onLoad: function () {
@@ -30,15 +35,23 @@ Page({
   },
   onUnload: function() {
   },
-  showImageDialog:function () {
+
+  bindKeyInput: function(e) {
+    this.setData({
+      inputValue: e.detail.value
+    })
+  },
+  showImageDialog:function (event) {
+    var chooseType = event.currentTarget.dataset.id;
+    that.setData({dialogType:chooseType})
+    if(chooseType == 1){
+      that.setData({dialogFocus:true});
+    }
     showImageDialog();
   },
-  chooseImage:function(){
-    that.setData({showDialog:false});
-    hideImageDialog();
-  },
-  delImage:function(){
-    that.setData({showDialog:false});
+  onDialogClick:function(event){
+    var chooseType = event.currentTarget.dataset.id;
+    console.log("chooseType:"+chooseType);
     hideImageDialog();
   },
 })
@@ -56,6 +69,12 @@ function showImageDialog(index){
   scaleBgAlpha(true, 0.01);
   scaleAlpha(true, 0.08);
 }
+
+function resetDialogData() {
+  if(that.data.showDialog){
+    that.setData({showDialog:false, dialogFocus:false, dialogHolder:"请输入", inputValue:""});
+  }
+}
 /**
  * 定时控制图片透明度
  */
@@ -70,6 +89,7 @@ function scaleBgAlpha(isShow, step) {
       that.setData({dialogBgAlpha: that.data.dialogBgAlpha - step > 0 ? that.data.dialogBgAlpha - step:0});
       if (that.data.dialogBgAlpha <= 0) {
         clearInterval(timer);
+        resetDialogData();
       }
     }
   }, interval);
@@ -89,6 +109,7 @@ function scaleAlpha(isShow, step) {
       that.setData({dialogAlpha: that.data.dialogAlpha - step > 0 ? that.data.dialogAlpha - step:0});
       if (that.data.dialogAlpha <= 0) {
         clearInterval(timer);
+        resetDialogData();
       }
     }
   }, interval);
